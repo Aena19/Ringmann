@@ -1,0 +1,38 @@
+[
+	{
+		"id" : 1,
+		"name" : "Sigma Excel - Ring Spinning & Compact Spinning",
+		"imgsrc" : "sigma-excel-726647.webp",
+		"price" : "75"
+	},
+	{
+		"id" : 2,
+		"name" : "Excel - Ring Spinning & Compact Spinning",
+		"price" : "125",
+		"imgsrc" : "excel-ring-spinning-compact-spinning-433125.webp"
+	},
+	{
+		"id" : 3,
+		"name" : "Spicon Rings - Ring Spinning & Compact Spinning for Short Staple Fibres",
+		"price" : "295",
+		"imgsrc" : "spicon-rings-243492.webp"
+	},
+	{
+		"id" : 4,
+		"name" : "Black Diamond - Ring Spinning & Compact Spinning",
+		"price" : "77",
+		"imgsrc" : "black-diamond-293015.webp"
+	},
+	{
+		"id" : 5,
+		"name" : "Conical Rings - Long Staple Spinning",
+		"price" : "295",
+		"imgsrc" : "conical-rings-622597.webp"
+	},
+	{
+		"id" : 6,
+		"name" : "Holders / Adaptors",
+		"price" : "75",
+		"imgsrc" : "holders-adaptors-804697.webp"
+	}
+]
