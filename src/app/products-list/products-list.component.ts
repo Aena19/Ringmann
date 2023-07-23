@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class ProductsListComponent {
 
-  url: string = '../../assets/data/pro.json';
+  url: string = 'assets/data/pro.json';
   products !: Product[] ;
   type : string = '';
   productId : number = 0;

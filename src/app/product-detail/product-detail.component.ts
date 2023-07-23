@@ -13,7 +13,7 @@ export class ProductDetailComponent {
 constructor(private route : ActivatedRoute, private http : HttpClient){}
 
 @Input('product')
-url: string = '../../assets/data/products.json';
+url: string = 'assets/data/products.json';
 products!: Product[]
 product!: Product
 productId : number = 0
