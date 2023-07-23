@@ -1,0 +1,28 @@
+<section class="px-96">
+    <div class="container h-[2000px] py-48">
+        <div class="container" *ngIf="submenu === 'rp'">
+            <span class="text-4xl font-bold">
+                Ring Profile 
+            </span>
+            <div class="container" class="py-6">
+                <img src="../../assets/images/ring_profile.webp"/>
+            </div>  
+        </div>
+        <div class="container" *ngIf="submenu === 'tsc'">
+            <span class="text-4xl font-bold">
+                Traveller Selection for Cotton
+            </span>
+            <div class="container" class="py-6">
+                <img src="../../assets/images/traveller_cotton.webp"/>
+            </div>  
+        </div>
+        <div class="container" *ngIf="submenu === 'tss'">
+            <span class="text-4xl font-bold">
+                Traveller Selection for Synthetic
+            </span>
+            <div class="container" class="py-6">
+                <img src="../../assets/images/traveller_synthetic.webp"/>
+            </div>  
+        </div>
+    </div>
+</section>

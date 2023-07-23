@@ -1,0 +1,17 @@
+
+    <section class="py-48 px-32">
+        <div class="container mx-auto flex flex-wrap" >
+            <app-product-card class="w-1/4 p-2 flex flex-wrap" *ngFor="let p of products" [product]="p">
+            </app-product-card>
+        </div>
+    </section> 
+
+<!-- <div class="container" *ngIf="type === 'single'">
+
+    <section class="py-48 px-32">
+        <div class="container mx-auto justify-center">
+            <app-product-card [product]="p"></app-product-card>
+        </div>  
+    </section> 
+
+</div> -->

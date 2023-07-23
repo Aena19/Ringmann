@@ -1,0 +1,133 @@
+<section class="py-48 px-32">
+    <div class="container mx-auto justify-center" *ngFor="let p of products; let i = index">
+        <div *ngIf="i === productId - 1">
+            <div class="flex gap-6 w-full">
+                <div class="container w-[640px] h-[550px]">
+                    <div class="container border border-slate-300">
+                        <img src="../../assets/images/{{p.imgsrc}}" class="h-full">
+                    </div>
+                </div>
+                <div class= "container w-[700px] h-[500px]">
+                    <p class="text-5xl">
+                        {{p.name}}
+                    </p>
+                    <br>
+                    <p class="text-lg">
+                        ₹ {{p.price}}.00
+                    </p>
+                    <br>
+                    <div *ngIf="p.size">
+                        <p class="text-sm font-bold">
+                            Size (ID x FD x H) 
+                        </p>
+                        <br>
+                        <div class="container flex flex-wrap ">
+                            <ul class="w-1/4 list-disc" *ngFor="let s of p.size">
+                                <li class="px-1 mx-8">{{s}}</li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <div *ngIf="p.flange">
+                        <p class="text-sm font-bold">
+                            Flange
+                        </p>
+                        <br>
+                        <div class="container flex flex-wrap ">
+                            <ul class="w-1/2 list-disc" *ngFor="let f of p.flange">
+                                <li class="px-1 mx-8">{{f}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div *ngIf="p.dimensions">
+                        <p class="text-sm font-bold">
+                            Dimensions
+                        </p>
+                        <br>
+                        <div class="container flex flex-wrap ">
+                            <ul class="w-1/2 list-disc" *ngFor="let d of p.dimensions">
+                                <li class="px-1 mx-8">{{d}}</li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <div *ngIf="p.lubrication">
+                        <p class="text-sm font-bold">
+                            Lubrication Holes
+                        </p>
+                        <br>
+                        <div class="container flex flex-wrap ">
+                            <ul class="w-1/2 list-disc" *ngFor="let l of p.lubrication">
+                                <li class="px-1 mx-8">{{l}}</li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <div *ngIf="p.fitting">
+                        <p class="text-sm font-bold">
+                            Fitting
+                        </p>
+                        <br>
+                        <div class="container flex flex-wrap ">
+                            <ul class="w-1/2 list-disc" *ngFor="let f of p.fitting">
+                                <li class="px-1 mx-8">{{f}}</li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <div *ngIf="p.material">
+                        <p class="text-sm font-bold">
+                            Material
+                        </p>
+                        <br>
+                        <div class="container flex flex-wrap ">
+                            <ul class="w-1/2 list-disc" *ngFor="let m of p.material">
+                                <li class="px-1 mx-8">{{m}}</li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                    <p class="text-lg italic">
+                        {{p.description}}
+                    </p>
+                    <br>
+                    <div *ngIf="p.features">
+                        <p class="text-sm font-bold">
+                            Features
+                        </p>
+                        <br>
+                        <div class="container flex flex-wrap">
+                            <ul class="list-disc w-1/2" *ngFor="let f of p.features">
+                                <li class="px-1 mx-8">{{f}}</li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <div *ngIf="p.example">
+                        <p class="text-sm font-bold">
+                            Kindly choose the suitable ring size as per below example:
+                        </p>
+                        <br>
+                        <div class="container ">
+                            <ul *ngFor="let e of p.example let i = index">
+                                <div *ngIf="i === 0">
+                                    <li class="px-1 mx-8 font-bold italic">{{e}}</li>
+                                    <br>
+                                </div>
+                                <div *ngIf="i != 0">
+                                    <li class="px-1 mx-8" *ngIf="i != 0">{{e}}</li>
+                                    <br>
+                                </div>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>  
+</section>

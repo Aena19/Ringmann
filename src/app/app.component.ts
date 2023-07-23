@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Products';
+
+  isMenuScrolled = false;
+
+  @HostListener('window:scroll',['$event'])
+  scrollCheck(){
+    if(pageYOffset > 80)
+      this.isMenuScrolled = true
+    else
+      this.isMenuScrolled = false
+  }
+  
+
 }
