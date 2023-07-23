@@ -1,0 +1,193 @@
+[
+	{
+		"id" : 1,
+		"name" : "Sigma Excel - Ring Spinning & Compact Spinning",
+		"imgsrc" : "sigma-excel-726647.webp",
+		"price" : 175,
+		"size" : [
+			"33 x 47 x 8",
+			"35 x 54 x 8",
+			"35 x 54 x 10",
+			"36 x 47 x 8",
+			"38 x 47 x 8",
+			"38 x 51 x 8",
+			"38 x 54 x 8",
+			"38 x 54 x 10",
+			"40 x 47 x 8",
+			"40 x 51 x 8",
+			"40 x 51 x 11",
+			"40 x 54 x 8",
+			"40 x 54 x 10",
+			"42 x 47 x 8",
+			"42 x 51 x 8",
+			"42 x 51 x 10",
+			"42 x 54 x 8",
+			"42 x 54 x 10",
+			"45 x 54 x 8",
+			"45 x 54 x 10"
+		],
+		"flange" : [
+			"1 (3.2 mm)",
+			"1/2 (2.6 mm)",
+			"1 1/2 (3.6 mm)",
+			"2 (4mm)"
+		],
+		"description" : "As pioneers of Surface Coating Technology, RINGMANN is proud to present SIGMA-EXCEL the ultimate Traveller Friendly Rings. The unique Surface Coating Technology developed at RINGMANN has made the Rings a sterling performer. SIGMA-EXCEL  with the lowest friction finish, affords high production and quality of yarn, leading to higher profitability.",
+		"features" : [
+			"Fine surface finish with low friction",
+			"Low Running-In Period",
+			"Instant start-up Speeds",
+			"Longer Life",
+			"Less Hairiness",
+			"Fewer End-Breaks",
+			"Less Pneumafil waste",
+			"High Production of Yarn"
+		],
+		
+		"example" : [
+			"33 x 47 x 8",
+			"Inner Dia: 33 mm | Fitting Dia: 47 mm | Height: 8 mm | Flange: 1 (3.2 mm) | Finish: Sigma Excel | Fixing: Adaptor"
+		]
+	},
+	{
+		"id" : 2,
+		"name" : "Excel - Ring Spinning & Compact Spinning",
+		"price" : 125,
+		"imgsrc" : "excel-ring-spinning-compact-spinning-433125.webp",
+		"size" : [
+			"33 x 47 x 8",
+			"35 x 54 x 8",
+			"35 x 54 x 10",
+			"36 x 47 x 8",
+			"38 x 47 x 8",
+			"38 x 51 x 8",
+			"38 x 54 x 8",
+			"38 x 54 x 10",
+			"40 x 47 x 8",
+			"40 x 51 x 8",
+			"40 x 51 x 11",
+			"40 x 54 x 8",
+			"40 x 54 x 10",
+			"42 x 47 x 8",
+			"42 x 51 x 8",
+			"42 x 51 x 10",
+			"42 x 54 x 8",
+			"42 x 54 x 10",
+			"45 x 54 x 8",
+			"45 x 54 x 10"
+		],
+		"flange" : [
+			"1 (3.2 mm)",
+			"1/2 (2.6 mm)",
+			"1 1/2 (3.6 mm)",
+			"2 (4mm)"
+		],
+		"description" : "As pioneers of Surface Coating Technology, RINGMANN is proud to present EXCEL, the ultimate Traveller Friendly Rings. The unique Surface Coating Technology developed at RINGMANN has made the Rings a sterling performer. EXCEL with the lowest friction finish, affords high production and quality of yarn, leading to higher profitability.",
+		"features" : [
+			"Fine surface finish with low friction",
+			"Low Running-In Period",
+			"Instant start-up Speeds",
+			"Longer Life",
+			"Less Hairiness",
+			"Fewer End-Breaks",
+			"Less Pneumafil waste",
+			"High Production of Yarn"
+		],
+		"example" : [
+			"33 x 47 x 8",
+			"Inner Dia: 33 mm | Fitting Dia: 47 mm | Height: 8 mm | Flange: 1 (3.2 mm) | Finish: Sigma Excel | Fixing: Adaptor"
+		]
+	},
+	{
+		"id" : 3,
+		"name" : "Spicon Rings - Ring Spinning & Compact Spinning for Short Staple Fibres",
+		"price" : 295,
+		"imgsrc" : "spicon-rings-243492.webp",
+		"size" : [
+			"36 x 51 x 8",
+			"38 x 51 x 8",
+			"40 x 54 x 8",
+			"42 x 54 x 8",
+			"42 x 54 x 10"
+		],
+		"description" : "The Russian influenced SU Ring has come into prominence for a few years now. This special ring has the longest life and highest speed among the rings. The Spicon Ring comes with a support ring."
+	},
+	{
+		"id" : 4,
+		"name" : "Black Diamond - Ring Spinning & Compact Spinning",
+		"imgsrc" : "black-diamond-293015.webp",
+		"price" : 77,
+		"size" : [
+			"33 x 47 x 8",
+			"35 x 54 x 8",
+			"35 x 54 x 10",
+			"36 x 47 x 8",
+			"38 x 47 x 8",
+			"38 x 51 x 8",
+			"38 x 54 x 8",
+			"38 x 54 x 10",
+			"40 x 47 x 8",
+			"40 x 51 x 8",
+			"40 x 51 x 11",
+			"40 x 54 x 8",
+			"40 x 54 x 10",
+			"42 x 47 x 8",
+			"42 x 51 x 8",
+			"42 x 51 x 10",
+			"42 x 54 x 8",
+			"42 x 54 x 10",
+			"45 x 54 x 8",
+			"45 x 54 x 10"
+		],
+		"flange" : [
+			"1 (3.2 mm)",
+			"1/2 (2.6 mm)",
+			"1 1/2 (3.6 mm)",
+			"2 (4mm)"
+		],
+		"description" : "Another truly precious product from RINGMANN. With its unique rust preventive and Traveller friendly surface coating, Black Diamond ensures trouble free production and quality. Economically priced for the cost conscious customers.",
+		"features" : [
+			"Low friction rings for regular spinners to reduce cost",
+			"A little longer running in rings",
+			"Surface roughness - 0.125 Ra Value maintained",
+			"Hardness - 950 Vickers"
+		],
+		"example" : [
+			"34 x 47 x 8",
+			"Inner Dia: 33 mm | Fitting Dia: 47 mm | Height: 8 mm | Flange: 1 (3.2 mm) | Finish: Sigma Excel | Fixing: Adaptor"
+		]
+	},
+	{
+		"id" : 5,
+		"name" : "Conical Rings - Long Staple Spinning",
+		"imgsrc" : "conical-rings-622597.webp",
+		"price" : 295,
+		"dimensions" : [
+			"48 x 55 x 11.1",
+			"51 x 58.4 x 11/.1"
+		],
+		"lubrication" : [
+			"3 x 4",
+			"4 x 4"
+		],
+		"fitting" : [
+			"On plate",
+			"On rng rail",
+			"with washer",
+			"ring holder"
+		],
+		"description" : "Conical Rings for all your Wool spinning requirements. It comes with or without cotton wick and can be tailor made to your choice. With four lubricating holes on top and inside of the ring for smooth traveller running."
+	},
+	{
+		"id" : 6,
+		"name" : "Holders / Adaptors",
+		"imgsrc" : "holders-adaptors-804697.webp",
+		"price" : 75,
+		"material" : [
+			"Aluminium",
+			"Nylon"
+		],
+		"description" : "Ring holders and adaptors tailor made to your choice. Can be made of either Nylon or Aluminium to suit your ring rail demand. For technical assistance ask us before you place an order."
+	}
+
+]
