@@ -11,6 +11,7 @@ export class AppComponent {
 
   @HostListener('window:scroll',['$event'])
   scrollCheck(){
+    console.log(pageYOffset)
     if(pageYOffset > 80)
       this.isMenuScrolled = true
     else

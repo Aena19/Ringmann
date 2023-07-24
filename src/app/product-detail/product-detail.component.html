@@ -1,10 +1,10 @@
 <section class="py-48 px-32">
     <div class="container mx-auto justify-center" *ngFor="let p of products; let i = index">
         <div *ngIf="i === productId - 1">
-            <div class="flex gap-6 w-full">
+            <div class="container flex gap-6 w-full">
                 <div class="container w-[640px] h-[550px]">
-                    <div class="container border border-slate-300">
-                        <img src="assets/images/{{p.imgsrc}}" class="h-full">
+                    <div class="border border-slate-300">
+                        <img src="assets/images/{{p.imgsrc}}">
                     </div>
                 </div>
                 <div class= "container w-[700px] h-[500px]">
@@ -131,3 +131,23 @@
         
     </div>  
 </section>
+
+<!-- <div class="relative">
+    
+    <div class="py-48 px-32 w-full fixed">
+          <div class="border border-slate-300 w-[640px] h-[510px]">
+            <img src="assets/images/conical-rings-622597.webp"/>
+          </div>
+          
+    </div>
+
+    <div class="w-full py-48 px-[700px] static">
+        <div class="flex flex-col items-center justify-center h-[2000px] bg-red-200">
+          <h2 class="mb-5 text-4xl">Meet Benny</h2>
+          <p class="mb-5">I was born 20 May 2020</p>
+        </div>
+      
+    
+      </div>
+
+</div> -->
