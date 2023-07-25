@@ -13,6 +13,7 @@ import { ContactComponent } from './contact/contact.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SupportComponent } from './support/support.component';
+import { LandingComponent } from './landing/landing.component';
 
 const routes : Routes = [
   {path: '', redirectTo: '/home',pathMatch:'full'},
@@ -40,7 +41,8 @@ const routes : Routes = [
     BlogsComponent,
     TechnicalComponent,
     PageNotFoundComponent,
-    SupportComponent
+    SupportComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
