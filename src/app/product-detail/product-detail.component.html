@@ -1,4 +1,28 @@
-<section class="py-48 px-32">
+<section class="pt-44 pb-10 px-32">
+    
+        <ul class="flex justify-end gap-6 mr-8 text-base text-blue-600 underline ">
+            <li *ngIf="productId != 1">
+                <a (click)="gotoPrevious()">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="py-1 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                    </svg> -->
+                    Previous Product
+                </a>
+            </li>
+            <li *ngIf="productId != 6">
+                <a (click)="gotoNext()">
+                    Next Product
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="py-1 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                    </svg>  -->
+                </a>
+
+            </li>
+        </ul>    
+    
+</section>
+    
+<section class="px-32">
     <div class="container mx-auto justify-center" *ngFor="let p of products; let i = index">
         <div *ngIf="i === productId - 1">
             <div class="container flex gap-6 w-full">

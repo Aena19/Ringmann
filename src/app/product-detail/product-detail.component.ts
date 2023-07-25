@@ -1,6 +1,6 @@
 import { Component,Input } from '@angular/core';
 import { Product } from 'src/assets/models/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -10,25 +10,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductDetailComponent {
 
-constructor(private route : ActivatedRoute, private http : HttpClient){}
+constructor(private route : ActivatedRoute, private http : HttpClient, private router : Router){}
 
 @Input('product')
 url: string = 'assets/data/products.json';
 products!: Product[]
-product!: Product
 productId : number = 0
 
 ngOnInit(){
-  this.productId = parseInt(this.route.snapshot.url[1].toString())
-  console.log('printing')
-  console.log(this.productId)
-  console.log("calling func")
+  this.route.paramMap.subscribe((params : ParamMap)=>{
+    this.productId = parseInt(params.get('id') || '')
+  })
   this.getProductsData()
-  console.log("finshed func")
-  console.log(this.products)
-  console.log(this.productId)
-  this.product = this.products[this.productId]
-  console.log(this.product)
 }
 
 getProductsData()
@@ -38,5 +31,15 @@ getProductsData()
     error:(error) => {console.log(error)}
   })    
 }
+
+gotoPrevious(){
+  this.router.navigate([('../') + (String(this.productId - 1))],{relativeTo : this.route})
+}
+
+
+gotoNext(){
+  this.router.navigate([('../') + (String(this.productId + 1))],{relativeTo : this.route})
+}
+
 
 }
