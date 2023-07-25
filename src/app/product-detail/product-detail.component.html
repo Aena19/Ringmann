@@ -2,7 +2,7 @@
     
         <ul class="flex justify-end gap-6 mr-8 text-base text-blue-600 underline ">
             <li *ngIf="productId != 1">
-                <a (click)="gotoPrevious()">
+                <a (click)="gotoPrevious()" class="hover:cursor-pointer">
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="py-1 w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
                     </svg> -->
@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li *ngIf="productId != 6">
-                <a (click)="gotoNext()">
+                <a (click)="gotoNext()" class="hover:cursor-pointer">
                     Next Product
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="py-1 w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
