@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductsListComponent } from './products-list/products-list.component';
@@ -14,6 +14,7 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SupportComponent } from './support/support.component';
 import { LandingComponent } from './landing/landing.component';
+import { CheckboxDropDownComponent } from './checkbox-dropdown/checkbox-dropdown.component';
 
 const routes : Routes = [
   {path: '', redirectTo: '/home',pathMatch:'full'},
@@ -42,12 +43,14 @@ const routes : Routes = [
     TechnicalComponent,
     PageNotFoundComponent,
     SupportComponent,
-    LandingComponent
+    LandingComponent,
+    CheckboxDropDownComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,20 @@
+<details class="duration-300 px-5 over" id={{id}}>
+    <summary class="bg-inherit px-5 py-3 text-base hover:underline cursor-pointer ">
+        {{filterName}}
+    </summary>
+    <div class="bg-white px-5 text-base font-light {{filterType==='F'?'h-[200px] w-[200px]':'h-[300px] w-[250px] overflow-y-scroll'}} border border-slate-400">
+        <div class="container flex justify-between items-center">
+            <p class="py-2">{{selectedCount}} selected</p>
+            <p class="hover:cursor-pointer underline" (click)="reset()">Reset</p>
+        </div>
+        <hr class="py-2">
+        <div *ngFor="let c of checkboxArray[0]; let i = index" class="py-1">
+            <div *ngFor="let c1 of checkboxArray[1]; let j = index">
+                <input *ngIf="i===j" type="checkbox" value={{i+1}} name={{id+i}} id={{id+i}} [(ngModel)]="checkboxArray[1][j]" (change)="filterValueChanged($event)" />
+                <label *ngIf="i===j" for={{id+i}}>
+                    {{c}}
+                </label>
+            </div>
+        </div>
+    </div>
+</details>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/assets/models/product.model';
 import { ActivatedRoute } from '@angular/router';
+import * as Products from 'src/assets/data/products.json'
 
 @Component({
   selector: 'app-products-list',
@@ -11,37 +12,55 @@ import { ActivatedRoute } from '@angular/router';
 
 export class ProductsListComponent {
 
-  url: string = 'assets/data/pro.json';
+  url: string = 'assets/data/products.json';
   products !: Product[] ;
+  productsToBeDisplayed !: Product[] ;
   type : string = '';
   productId : number = 0;
-
+  filterValueArray : string[] = []
+  filterValue : string = ""
+  filterType : string = ""
+  
   constructor(private http: HttpClient, private route : ActivatedRoute) {}
 
   ngOnInit() {
-    console.log("calling func")
     this.getProductsData()
-    console.log("finshed func")
-    console.log(this.products)
-      console.log("printing")
-      console.log(this.route.snapshot.url.length)
-      if (this.route.snapshot.url.length == 1)
-          this.type = "all" 
-      else
-          this.type = "single"
-    // console.log(this.type)
-    // console.log("pid " + this.route.snapshot.url[1])
-    // console.log(this.route.snapshot.url[1].toString())
-    // this.productId = parseInt(this.route.snapshot.url[1].toString())
-    // console.log("pro")
-    // console.log(this.products[this.productId])
   }
 
   getProductsData()
   {
     return this.http.get(this.url).subscribe({
-      next: (data) => {this.products = data as Product[]; console.log("in getproductsdata from pro list"); console.log(this.products)},
+      next: (data) => {this.products = data as Product[]; this.getFilterValues('')},
       error:(error) => {console.log(error)}
     })    
+    //this.products = (<any>Object).assign(new Product(),Products)
   }
+
+  getFilterValues(filterValueString : string){
+    if(filterValueString != ''){
+      if(filterValueString.length > 2)
+        this.filterValueArray = filterValueString.substring(0,filterValueString.length-2).split(",")
+      if(filterValueString.length === 2)
+        filterValueString = ""
+      this.filterType = filterValueString.substring(filterValueString.length-1,filterValueString.length)
+    }
+    
+    if(filterValueString === '')
+    {
+      this.productsToBeDisplayed = this.products
+    }
+    else{
+    
+    for(let i = 0 ; i < this.filterValueArray.length; i++){
+      this.filterValue = this.filterValueArray[i].substring(0,this.filterValueArray[i].length-4)
+      if(this.filterType === "F")
+        this.productsToBeDisplayed = this.products.filter(product => product.flange).filter(product => product.flange.toString().includes(this.filterValue))
+      else
+      this.productsToBeDisplayed = this.products.filter(product => product.size).filter(product => product.size.toString().includes(this.filterValue))
+    }
+   
+  }
+  }
+
+  
 }
