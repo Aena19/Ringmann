@@ -45,7 +45,7 @@
         </div>
     </div>
     <!-- fixed top-0 w-full bg-white shadow-xl  -->
-    <div class=" {{isMenuScrolled?'fixed top-0 w-full bg-white shadow-xl':'pt-10'}} z-10">
+    <div class=" {{isMenuScrolled?'fixed top-0 w-full bg-white shadow-xl':'pt-10'}} z-30">
         <div class="container mx-auto {{isMenuScrolled?'':'border'}} border-slate-500 rounded-lg flex items-center justify-center px-2 py-2 border-opacity-30" >
             <ul class="flex font-bold text-slate-700 text-lg">
                 <li>
@@ -56,7 +56,7 @@
                 <li class="mx-3 px-5 py-3">
                     <a [routerLink]="['home']">Home</a>
                 </li>
-                <li class="mx-3 px-5 py-3 relative hover:bg-slate-200 group z-10">
+                <li class="mx-3 px-5 py-3 relative hover:bg-slate-200 group z-20">
                     <a class="group-hover:text-white">Technical</a>
                     <ul class="absolute  bg-slate-200 top-14 left-0 hidden group-hover:block w-52">
                         <li class="my-1 hover:bg-slate-400 px-5 py-3">

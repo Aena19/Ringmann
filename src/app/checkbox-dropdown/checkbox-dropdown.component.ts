@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/assets/models/product.model';
 import * as Products from 'src/assets/data/products.json'
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-checkbox-dropdown',
@@ -12,8 +13,9 @@ export class CheckboxDropDownComponent {
   @Input() filterType : string = ""
   @Input() filterName : string = ""
 
-  @Output() valueFilter = new EventEmitter<string>
+  @Output() filterValueChangeEvent = new EventEmitter<string>
 
+  url: string = 'assets/data/products.json';
   products!: Product[]
   flangeValues : string[] = []
   sizeValues : string[] = []
@@ -22,37 +24,58 @@ export class CheckboxDropDownComponent {
   id:string=""
   selectedValues : string[] =[]
   selectedCount : number = 0
+  priceRange : string[] = ["0-50","50-100","100-150","150-200","200-250","250-300"]
 
-  // @HostListener('mousedown',['$event'])
-  // closeDetails(){
-  //   document.getElementById("flange")?.setAttribute("open","close")
-  //   document.getElementById("size")?.setAttribute("open","close")
-  //   //console.log()
-  // }
-  
+  constructor(private http: HttpClient) {}
 
   ngOnInit(){
     this.getProductsData()
-    if(this.filterType === "F"){
-      this.getFlangeValues()
-      this.id = "flange"
-    }
-    if(this.filterType === "S"){
-      this.getSizeValues()
-      this.id = "size"
-    }
-      
-    
   }
 
   getProductsData()
   {
-    // return this.http.get(this.url).subscribe({
-    //   next: (data) => {this.products = data as Product[];console.log("in getproductsdata from pro detail");console.log(this.products)},
-    //   error:(error) => {console.log(error)}
-    // })    
-    this.products = (<any>Object).assign(new Product(),Products)
+    return this.http.get(this.url).subscribe({
+      next: (data) => {this.products = data as Product[]
+        if(this.filterName === "Flange"){
+          this.getFlangeValues()
+          this.id = "flange"
+        }
+        if(this.filterName === "Size(idxfdxh)"){
+          this.getSizeValues()
+          this.id = "size"
+        }
+        if(this.filterName === "Price"){
+          this.getPriceValues()
+          this.id = "price"
+        }
+      },
+      error:(error) => {console.log(error)}
+    }) 
   }
+
+  getPriceValues(){
+    var tempProducts : Product[]
+    this.checkboxArray[0] = this.priceRange
+    for(let i = 0; i < this.checkboxArray[0].length; i++){
+      var tempcheckboxArray = this.checkboxArray[0][i].split('-')
+      var minPrice = parseInt(tempcheckboxArray[0])
+      var maxPrice = parseInt(tempcheckboxArray[1]) 
+
+      tempProducts = this.products.filter(product => product.price > minPrice).filter(product => product.price < maxPrice)
+
+      var priceRange : string = this.checkboxArray[0][i]
+      var count : number = tempProducts.length
+
+      this.checkboxArray[0][i] = this.checkboxArray[0][i] + " (" + count + ")" 
+
+      for(let i = 0;i<this.checkboxArray[0].length;i++)
+      {
+        this.checkboxArray[1][i]= false
+      }
+    }
+  }
+
+
 
   getFlangeValues(){
     for(let i = 0; i < this.products.length; i++){
@@ -78,10 +101,13 @@ export class CheckboxDropDownComponent {
   }
 
   getCount(key: string) {
-    if(this.filterType === "F")
+    if(this.filterName === "Flange")
       return this.flangeValues.filter((curElem) => curElem == key).length
-    else
+    else if(this.filterName === "Size(idxfdxh)")
       return this.sizeValues.filter((curElem) => curElem == key).length
+    else
+      return 0
+    
   }
 
   getSizeValues() {
@@ -93,14 +119,11 @@ export class CheckboxDropDownComponent {
       }
     }
     this.checkboxArray[0] = this.sizeValues.filter(this.uniqueFilter)
-
     for (let i = 0; i < this.checkboxArray[0].length; i++){
       var size : string = this.checkboxArray[0][i]
       var count : number = this.getCount(size)
-
-      this.checkboxArray[0][i] = this.sizeValues[i] + " (" + count + ")" 
+      this.checkboxArray[0][i] = size + " (" + count + ")" 
     }
-
     for(let i = 0;i<this.checkboxArray[0].length;i++)
     {
       this.checkboxArray[1][i]= false
@@ -133,7 +156,7 @@ export class CheckboxDropDownComponent {
       }
     
     this.selectedCount = this.checkboxArray[1].filter(this.getTrueCount).length
-    this.valueFilter.emit(this.selectedValues.toString() + ','+this.filterType)
+    this.filterValueChangeEvent.emit(this.selectedValues.toString() + ','+this.filterName)
   }
 
   getTrueCount(value : boolean){
@@ -146,7 +169,7 @@ export class CheckboxDropDownComponent {
     for(let i = 0; i < this.checkboxArray[1].length; i++){
       this.checkboxArray[1][i] = false
     }
-    this.valueFilter.emit(this.selectedValues.toString() + ','+this.filterType)
+    this.filterValueChangeEvent.emit(this.selectedValues.toString() + ','+this.filterName)
   }
 
 }

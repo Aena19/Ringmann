@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SupportComponent } from './support/support.component';
 import { LandingComponent } from './landing/landing.component';
 import { CheckboxDropDownComponent } from './checkbox-dropdown/checkbox-dropdown.component';
+import { PriceFilterComponent } from './price-filter/price-filter.component';
 
 const routes : Routes = [
   {path: '', redirectTo: '/home',pathMatch:'full'},
@@ -44,7 +45,8 @@ const routes : Routes = [
     PageNotFoundComponent,
     SupportComponent,
     LandingComponent,
-    CheckboxDropDownComponent
+    CheckboxDropDownComponent,
+    PriceFilterComponent
   ],
   imports: [
     BrowserModule,
