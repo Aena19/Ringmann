@@ -2,36 +2,44 @@
     <summary class="bg-inherit px-5 py-3 text-base hover:underline cursor-pointer ">
         {{filterName}}
     </summary>
-    <div class="bg-white px-5 text-base font-light {{filterType==='F'?'h-[40px] w-[200px]':'h-[40px] w-[250px]'}} border-t-2 border-r-2 border-l-2 border-slate-200">
+    <div class="bg-white px-5 text-base font-light h-[40px] w-[250px] border-t-2 border-r-2 border-l-2 border-slate-200">
         <div class="container flex justify-between items-center">
-            <p class="py-2">{{selectedCount}} selected</p>
+            <p *ngIf = "filterName === 'Price'" class="py-2">{{selectedPriceCount}} selected</p>
+            <p *ngIf = "filterName === 'Flange'" class="py-2">{{selectedFlangeCount}} selected</p>
+            <p *ngIf = "filterName === 'Size(idxfdxh)'" class="py-2">{{selectedSizeCount}} selected</p>
             <p class="hover:cursor-pointer underline" (click)="reset()">Reset</p>
         </div>
         <hr>
     </div>
-    <div class="bg-white px-5 text-base font-light {{filterType==='F'?'h-[140px] w-[200px]':'h-[300px] w-[250px] overflow-scroll'}}  border-2 border-slate-200 ">
-        <div *ngFor="let c of checkboxArray[0]; let i = index" class="py-1">
-            <div *ngFor="let c1 of checkboxArray[1]; let j = index">
-                <input *ngIf="i===j" type="checkbox" value={{i+1}} name={{id+i}} id={{id+i}} [(ngModel)]="checkboxArray[1][j]" (change)="filterValueChanged($event)" />
-                <label *ngIf="i===j" for={{id+i}}>
+    
+    <div *ngIf = "filterName === 'Price'" class="bg-white px-5 text-base font-light h-[300px] w-[250px] overflow-scroll  border-2 border-slate-200 ">
+        <div *ngFor="let c of checkboxArrayPrice[0]; let i = index" class="py-1">
+            <div *ngFor="let c1 of checkboxArrayPrice[1]; let j = index">
+                <input *ngIf="i===j" type="checkbox" value={{i+1}} name={{id+i}} id={{id+i}} [(ngModel)]="checkboxArrayPrice[1][j]" (change)="filterValueChanged()" />
+                <label *ngIf="i===j" for={{id+i}} id={{label+id+i}}>
                     {{c}}
                 </label>
             </div>
         </div>
     </div>
-    <!-- <div class="bg-white px-5 text-base font-light {{filterType==='F'?'h-[200px] w-[200px]':'h-[300px] w-[250px] overflow-y-scroll'}} border border-slate-400">
-        <div class="container flex justify-between items-center border border-yellow-400">
-            <p class="py-2">{{selectedCount}} selected</p>
-            <p class="hover:cursor-pointer underline" (click)="reset()">Reset</p>
-        </div>
-        <hr >
-        <div *ngFor="let c of checkboxArray[0]; let i = index" class="py-1">
-            <div *ngFor="let c1 of checkboxArray[1]; let j = index">
-                <input *ngIf="i===j" type="checkbox" value={{i+1}} name={{id+i}} id={{id+i}} [(ngModel)]="checkboxArray[1][j]" (change)="filterValueChanged($event)" />
-                <label *ngIf="i===j" for={{id+i}}>
+    <div *ngIf = "filterName === 'Flange'" class="bg-white px-5 text-base font-light h-[300px] w-[250px] overflow-scroll  border-2 border-slate-200 ">
+        <div *ngFor="let c of checkboxArrayFlange[0]; let i = index" class="py-1">
+            <div *ngFor="let c1 of checkboxArrayFlange[1]; let j = index">
+                <input *ngIf="i===j" type="checkbox" value={{i+1}} name={{id+i}} id={{id+i}} [(ngModel)]="checkboxArrayFlange[1][j]" (change)="filterValueChanged()" />
+                <label *ngIf="i===j" for={{id+i}} id={{label+id+i}}>
                     {{c}}
                 </label>
             </div>
         </div>
-    </div> -->
+    </div>
+    <div *ngIf = "filterName === 'Size(idxfdxh)'" class="bg-white px-5 text-base font-light {{filterType==='F'?'h-[140px] w-[200px]':'h-[300px] w-[250px] overflow-scroll'}}  border-2 border-slate-200 ">
+        <div *ngFor="let c of checkboxArraySize[0]; let i = index" class="py-1">
+            <div *ngFor="let c1 of checkboxArraySize[1]; let j = index">
+                <input *ngIf="i===j" type="checkbox" value={{i+1}} name={{id+i}} id={{id+i}} [(ngModel)]="checkboxArraySize[1][j]" (change)="filterValueChanged()" />
+                <label *ngIf="i===j" for={{id+i}} id={{label+id+i}}>
+                    {{c}}
+                </label>
+            </div>
+        </div>
+    </div>
 </details>

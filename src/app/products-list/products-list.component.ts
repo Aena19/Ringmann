@@ -21,23 +21,30 @@ export class ProductsListComponent {
   filterValue : string = ""
   filterType : string = ""
   filterName : string = ""
-
+  inputproduct : Product[] = [new Product(),new Product()]
   constructor(private http: HttpClient, private route : ActivatedRoute) {}
+  productsToBeDisplayedCount : number = 0
 
   @HostListener('document:click', ['$event'])
   clickout(event : Event) {
     console.log(event)
-    //document.getElementById()
+    // if(document.getElementById("price")?.getAttribute('open')==='')
+    //   document.getElementById("price")?.removeAttribute('open')
+    // if(document.getElementById("flange")?.getAttribute('open')==='')
+    //   document.getElementById("flange")?.removeAttribute('open')
+    // if(document.getElementById("size")?.getAttribute('open')==='')
+    //   document.getElementById("size")?.removeAttribute('open')
   }
 
   ngOnInit() {
+    console.log('ngoninit...ProductsListComponent')
     this.getProductsData()
   }
 
   getProductsData()
   {
     return this.http.get(this.url).subscribe({
-      next: (data) => {this.products = data as Product[]; this.getFilterValues('')},
+      next: (data) => {this.products = data as Product[]; this.getFilterValues('load')},
       error:(error) => {console.log(error)}
     })    
     //this.products = (<any>Object).assign(new Product(),Products)
@@ -47,58 +54,72 @@ export class ProductsListComponent {
     console.log("getFilterValues")
     var tempProduct : Product[]
 
-    if(filterValueString != '')
-      this.filterValueArray = filterValueString.split(",")
-
-    if(this.filterValueArray.length > 0)
-    {
-      this.filterName= this.filterValueArray[this.filterValueArray.length-1]
-      this.filterValueArray.pop()
-      if(this.filterValueArray[0] === '')
-        filterValueString = ""
-    }
-    
-    // if(filterValueString != ''){
-    //   if(filterValueString.length > 2)
-    //     this.filterValueArray = filterValueString.substring(0,filterValueString.length-2).split(",")
-    //   if(filterValueString.length === 2)
-    //     filterValueString = ""
-    //   this.filterType = filterValueString.substring(filterValueString.length-1,filterValueString.length)
-    // }
-    
-    if(filterValueString === '')
+    if(filterValueString === 'load')
     {
       this.productsToBeDisplayed = this.products
     }
     else{
-      this.productsToBeDisplayed =[]
-      for(let i = 0 ; i < this.filterValueArray.length; i++){
-        this.filterValue = this.filterValueArray[i].substring(0,this.filterValueArray[i].length-4)
-        if(this.filterName === "Flange")
-          tempProduct = this.products.filter(product => product.flange).filter(product => product.flange.toString().includes(this.filterValue))
-        else if(this.filterName === "Size(idxfdxh)")
-          tempProduct = this.products.filter(product => product.size).filter(product => product.size.toString().includes(this.filterValue))
-        else if(this.filterName === "Price"){
-          var tempfilterValueArray = this.filterValueArray[i].split('-')
-          var minPrice = parseInt(tempfilterValueArray[0])
-          var maxPrice = parseInt(tempfilterValueArray[1])
-  
-          console.log(minPrice + '  ' + maxPrice)
-  
-          tempProduct = this.products.filter(product => product.price > minPrice).filter(product => product.price < maxPrice)
-        }
-        else 
-          tempProduct = []
+      this.filterValueArray = []
+      this.productsToBeDisplayed = []
+      if(filterValueString != '')
+        this.filterValueArray = filterValueString.split(",")
+      
+      var filterValue : number = 0
+    
+      for(let i = 0; i < this.filterValueArray.length; i++){
+        filterValue = parseInt(this.filterValueArray[i])
+        tempProduct = this.products.filter(product => product.id === filterValue)
         for(let i = 0; i < tempProduct.length; i++){
-          this.productsToBeDisplayed.push(tempProduct[i])
+                  this.productsToBeDisplayed.push(tempProduct[i])
         }
       }
-      this.productsToBeDisplayed = this.productsToBeDisplayed.filter(this.uniqueFilter)
     }
-    console.log(this.productsToBeDisplayed)
+    this.productsToBeDisplayedCount = this.productsToBeDisplayed.length
+    this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => p1.id - p2.id)
   }
 
   uniqueFilter(value : Product, index : number, self : Product[]) {
     return self.indexOf(value) === index;
   }  
+
+  sortProducts(sortOption:number){
+    if(sortOption == 1){
+      this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => p1.id - p2.id)
+    }
+    else if(sortOption == 2){
+      
+      this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => {
+        if (p1.name > p2.name) {
+            return 1;
+        }
+        if (p1.name < p2.name) {
+            return -1;
+        }
+        return 0;
+        }
+        )
+    }
+    else if(sortOption == 3){
+      
+      this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => {
+        if (p2.name > p1.name) {
+            return 1;
+        }
+        if (p2.name < p1.name) {
+            return -1;
+        }
+        return 0;
+        }
+        )
+    }
+    else if(sortOption == 4){
+      
+      this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => p1.price - p2.price)
+    }
+    else if(sortOption == 5){
+      
+      this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => p2.price - p1.price)
+    }
+
+  }
 }

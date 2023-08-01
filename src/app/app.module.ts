@@ -16,6 +16,7 @@ import { SupportComponent } from './support/support.component';
 import { LandingComponent } from './landing/landing.component';
 import { CheckboxDropDownComponent } from './checkbox-dropdown/checkbox-dropdown.component';
 import { PriceFilterComponent } from './price-filter/price-filter.component';
+import { SortDropdownComponent } from './sort-dropdown/sort-dropdown.component';
 
 const routes : Routes = [
   {path: '', redirectTo: '/home',pathMatch:'full'},
@@ -46,7 +47,8 @@ const routes : Routes = [
     SupportComponent,
     LandingComponent,
     CheckboxDropDownComponent,
-    PriceFilterComponent
+    PriceFilterComponent,
+    SortDropdownComponent
   ],
   imports: [
     BrowserModule,

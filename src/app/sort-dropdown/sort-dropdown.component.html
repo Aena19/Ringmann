@@ -1,0 +1,9 @@
+<label for="sort" class="text-base">Sort By : </label>
+
+<select name="sort" id="sort" class="border border-slate-300 text-base" [(ngModel)]="sortOption" (change)="sortChanged()">
+    <option value=1 class="text-base font-light">Featured</option>
+    <option value=2 class="text-base font-light">Alphabetically, A - Z</option>
+    <option value=3 class="text-base font-light">Alphabetically, Z- A</option>
+    <option value=4 class="text-base font-light">Price, low to high</option>
+    <option value=5 class="text-base font-light">Price, high to low</option>
+</select>
