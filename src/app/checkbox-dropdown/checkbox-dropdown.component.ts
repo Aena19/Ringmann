@@ -196,6 +196,7 @@ export class CheckboxDropDownComponent {
     console.log('in getSelectedPriceValues')
     this.selectedPriceValues = []
     if(this.checkboxArrayPrice[0].length != 0){
+      console.log('in if')
       for(let j = 0; j < this.checkboxArrayPrice[0].length; j++){
         if(this.checkboxArrayPrice[1][j] == true){
           this.selectedPriceValues.push(this.checkboxArrayPrice[0][j])
@@ -204,6 +205,7 @@ export class CheckboxDropDownComponent {
     }
     else{
       for(let i = 0; i > -1; i++){
+        console.log('in else')
         if(document.getElementById("price"+i) != null){
             if(document.getElementById("price"+i)!.getAttribute('ng-reflect-model') === "true"){
               this.selectedPriceValues.push(document.getElementById("labelprice"+i)!.innerHTML.substring(1,document.getElementById("labelprice"+i)!.innerHTML.length-1))
