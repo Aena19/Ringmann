@@ -206,6 +206,7 @@ export class CheckboxDropDownComponent {
     else{
       console.log('in else')
       for(let i = 0; i > -1; i++){
+        console.log('in for')
         console.log(document.getElementById("price"+i))
         if(document.getElementById("price"+i) != null){
             if(document.getElementById("price"+i)!.getAttribute('ng-reflect-model') === "true"){
