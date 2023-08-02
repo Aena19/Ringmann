@@ -204,8 +204,8 @@ export class CheckboxDropDownComponent {
       }
     }
     else{
+      console.log('in else')
       for(let i = 0; i > -1; i++){
-        console.log('in else')
         if(document.getElementById("price"+i) != null){
             if(document.getElementById("price"+i)!.getAttribute('ng-reflect-model') === "true"){
               this.selectedPriceValues.push(document.getElementById("labelprice"+i)!.innerHTML.substring(1,document.getElementById("labelprice"+i)!.innerHTML.length-1))
@@ -240,6 +240,7 @@ export class CheckboxDropDownComponent {
           break
       }
     }
+    console.log(this.selectedFlangeValues)
   }
 
   getSelectedSizeValues(){
