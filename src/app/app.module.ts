@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -17,6 +17,12 @@ import { LandingComponent } from './landing/landing.component';
 import { CheckboxDropDownComponent } from './checkbox-dropdown/checkbox-dropdown.component';
 import { PriceFilterComponent } from './price-filter/price-filter.component';
 import { SortDropdownComponent } from './sort-dropdown/sort-dropdown.component';
+import { FooterComponent } from './footer/footer.component';
+import { Covid19Component } from './covid19/covid19.component';
+import { RefundComponent } from './refund/refund.component';
+import { ShippingComponent } from './shipping/shipping.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { ServiceTermsComponent } from './service-terms/service-terms.component';
 
 const routes : Routes = [
   {path: '', redirectTo: '/home',pathMatch:'full'},
@@ -30,7 +36,12 @@ const routes : Routes = [
   {path: 'products/:id', component: ProductDetailComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'blogs', component: BlogsComponent},
-  {path: '**', component: PageNotFoundComponent},
+  {path: 'covid19',component: Covid19Component},
+  {path: 'refund',component : RefundComponent},
+  {path: 'shipping',component : ShippingComponent},
+  {path: 'privacy',component : PrivacyComponent},
+  {path: 'serviceterms',component : ServiceTermsComponent},
+  {path: '**', component: PageNotFoundComponent}
 ]
 
 @NgModule({
@@ -48,7 +59,13 @@ const routes : Routes = [
     LandingComponent,
     CheckboxDropDownComponent,
     PriceFilterComponent,
-    SortDropdownComponent
+    SortDropdownComponent,
+    FooterComponent,
+    Covid19Component,
+    RefundComponent,
+    ShippingComponent,
+    PrivacyComponent,
+    ServiceTermsComponent
   ],
   imports: [
     BrowserModule,
