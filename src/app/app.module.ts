@@ -15,7 +15,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SupportComponent } from './support/support.component';
 import { LandingComponent } from './landing/landing.component';
 import { CheckboxDropDownComponent } from './checkbox-dropdown/checkbox-dropdown.component';
-import { PriceFilterComponent } from './price-filter/price-filter.component';
 import { SortDropdownComponent } from './sort-dropdown/sort-dropdown.component';
 import { FooterComponent } from './footer/footer.component';
 import { Covid19Component } from './covid19/covid19.component';
@@ -58,7 +57,6 @@ const routes : Routes = [
     SupportComponent,
     LandingComponent,
     CheckboxDropDownComponent,
-    PriceFilterComponent,
     SortDropdownComponent,
     FooterComponent,
     Covid19Component,

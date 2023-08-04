@@ -3,9 +3,9 @@
     <br>
     <div class="container flex  items-center justify-between relative z-10">
         <div class="flex h-[50px]">
-            <app-checkbox-dropdown [inputProduct]=productsToBeDisplayed filterName="Price" (filterValueChangeEvent) = "getFilterValues($event)" class=" w-[100px]"></app-checkbox-dropdown>
-            <app-checkbox-dropdown [inputProduct]="productsToBeDisplayed" filterName="Flange" (filterValueChangeEvent) = "getFilterValues($event)" class=" w-[100px]"></app-checkbox-dropdown>
-            <app-checkbox-dropdown [inputProduct]="productsToBeDisplayed" filterName="Size(idxfdxh)" (filterValueChangeEvent) = "getFilterValues($event)" class="w-[100px]"></app-checkbox-dropdown>
+            <app-checkbox-dropdown [inputProduct]=productsToBeDisplayed [checkedValues]="selectedPriceValues" filterName="Price" (filterValueChangeEvent) = "getFilterValues($event)" [detailclickCounter] = "detailclickCounter" class=" w-[100px]"></app-checkbox-dropdown>
+            <app-checkbox-dropdown [inputProduct]="productsToBeDisplayed" [checkedValues]="selectedFlangeValues" filterName="Flange" (filterValueChangeEvent) = "getFilterValues($event)" [detailclickCounter] = "detailclickCounter" class=" w-[100px]"></app-checkbox-dropdown>
+            <app-checkbox-dropdown [inputProduct]="productsToBeDisplayed" [checkedValues]="selectedSizeValues" filterName="Size(idxfdxh)" (filterValueChangeEvent) = "getFilterValues($event)" [detailclickCounter] = "detailclickCounter" class="w-[100px]"></app-checkbox-dropdown>
         </div>
         <div class="px-5 flex ">
             <app-sort-dropdown (sortOptionChangeEvent) ="sortProducts($event)" class="w-[250px]"></app-sort-dropdown>
