@@ -20,7 +20,7 @@
         <div class="underline hover:cursor-pointer" (click)="removeAllFilters()">Remove all</div>
     </div>
     <div class="container mx-auto flex flex-wrap relative">
-        <app-product-card class="md:w-1/2 lg:w-1/3 xl:w-1/4 p-2 flex flex-wrap" *ngFor="let p of productsToBeDisplayed" [product]="p">
+        <app-product-card class="md:w-1/2 lg:w-1/3 xl:w-1/4 p-2 flex flex-wrap" *ngFor="let p of productsToBeDisplayed" [product]="p" [allSelectedFilters]="selectedPriceValues.toString() + ',Price;'+selectedFlangeValues.toString() + ',Flange;'+selectedSizeValues.toString() + ',Size(idxfdxh);'" [selectedProductIds] = "selectedProductIds.toString()">
         </app-product-card>
     </div>
 </section> 

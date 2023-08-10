@@ -1,7 +1,7 @@
 import { Component, HostListener, ViewChildren, QueryList, Query } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/assets/models/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import * as Products from 'src/assets/data/products.json'
 import { query } from '@angular/animations';
 import { CheckboxDropDownComponent } from '../checkbox-dropdown/checkbox-dropdown.component';
@@ -26,19 +26,25 @@ export class ProductsListComponent {
   inputproduct : Product[] = [new Product(),new Product()]
   constructor(private http: HttpClient, private route : ActivatedRoute) {}
   productsToBeDisplayedCount : number = 0
-
+  allSelectedFilters !: string
   selectedPriceValues : string[] =[]
   selectedFlangeValues : string[] =[]
   selectedSizeValues : string[] =[]
   selectedFlangeArray : string[] = []
-
+  filter !: string 
   detailclickCounter : number = 0
-
+selectedProductIds : number[] = []
   ngOnInit() {  
     document.addEventListener('click', function(e) {
       const details = document.querySelectorAll("details");
       details.forEach(f => {e.target instanceof Node && !f.contains(e.target) ? f.removeAttribute('open') : ''});
     })
+    
+    this.route.paramMap.subscribe((params : ParamMap)=>{
+      this.filter = (params.get('filter') || '').replaceAll('^','/')
+      console.log(this.filter)
+    })
+
     
     this.getProductsData()
   }
@@ -46,7 +52,19 @@ export class ProductsListComponent {
   getProductsData()
   {
     return this.http.get(this.url).subscribe({
-      next: (data) => {this.products = data as Product[]; this.getFilterValues('load')},
+      next: (data) => {
+          this.products = data as Product[]; 
+          if(this.filter === '')
+            this.getFilterValues('load');
+          else{
+            var splitFilterArray = this.filter.split(';')
+            console.log(splitFilterArray)
+            for(let i = 0; i < splitFilterArray.length - 1; i++){
+              console.log(splitFilterArray[i])
+              this.getFilterValues(splitFilterArray[i])
+            }
+          }
+        },
       error:(error) => {console.log(error)}
     })      
   }
@@ -84,7 +102,6 @@ export class ProductsListComponent {
       else if(filterName === 'Size(idxfdxh)'){
         this.selectedSizeValues = this.filterValueArray
       }
-
       this.productsToBeDisplayed = this.filterProductsByPrice()
       console.log('applied price filter')
       console.log(this.productsToBeDisplayed)
@@ -96,19 +113,15 @@ export class ProductsListComponent {
       console.log(this.productsToBeDisplayed)
       
       var filterValue : number = 0
-    
-      // for(let i = 0; i < this.filterValueArray.length; i++){
-      //   filterValue = parseInt(this.filterValueArray[i])
-      //   tempProduct = this.products.filter(product => product.id === filterValue)
-      //   for(let i = 0; i < tempProduct.length; i++){
-      //             this.productsToBeDisplayed.push(tempProduct[i])
-      //   }
-      //}
     }
     
     this.productsToBeDisplayed = this.productsToBeDisplayed.filter(this.uniqueFilterProduct)
     this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => p1.id - p2.id)
     this.productsToBeDisplayedCount = this.productsToBeDisplayed.length
+    this.selectedProductIds.length = 0
+    for(let i = 0; i < this.productsToBeDisplayedCount; i++){
+      this.selectedProductIds.push(this.productsToBeDisplayed[i].id)
+    }
     console.log(this.productsToBeDisplayed)
     console.log('ending getfiltervalues productslist')
   }
@@ -130,7 +143,7 @@ console.log(this.selectedFlangeValues)
       filterValue = this.selectedFlangeValues[i].substring(0,this.selectedFlangeValues[i].length-4)
 console.log(filterValue)
       tempProduct = inputProduct.filter(product => product.flange).filter(product => product.flange.toString().includes(filterValue))
-console.log(tempProduct)
+      console.log(tempProduct)
       for(let i = 0; i < tempProduct.length; i++){
         finalProduct.push(tempProduct[i])
       }

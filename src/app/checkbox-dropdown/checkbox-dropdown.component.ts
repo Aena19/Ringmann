@@ -33,9 +33,9 @@ export class CheckboxDropDownComponent {
   selectedPriceCount : number = 0
   selectedFlangeCount : number = 0
   selectedSizeCount : number = 0
-  priceRange : string[] = ["0-50","51-100","101-150","151-200","201-250","251-300"]
-  flangeList !: string[]
-  sizeList !: string[]
+  priceRangeList : string[] = ["0-50","51-100","101-150","151-200","201-250","251-300"]
+  flangeList : string[] = ["1 (3.2 mm)","1/2 (2.6 mm)","1 1/2 (3.6 mm)","2 (4mm)"]
+  sizeList : string[] = ["33 x 47 x 8","35 x 54 x 8","35 x 54 x 10","36 x 47 x 8","36 x 51 x 8","38 x 47 x 8","38 x 51 x 8","38 x 54 x 8","38 x 54 x 10","40 x 47 x 8","40 x 51 x 8","40 x 51 x 11","40 x 54 x 8","40 x 54 x 10","42 x 47 x 8","42 x 51 x 8","42 x 51 x 10","42 x 54 x 8","42 x 54 x 10","45 x 54 x 8","45 x 54 x 10"]
   productsToBeDisplayed! : Product[]
   label : string = "label"
   @Input() detailclickCounter !: number 
@@ -102,12 +102,12 @@ export class CheckboxDropDownComponent {
     return this.http.get(this.url).subscribe({
       next: (data) => {this.products = data as Product[]
         if(this.filterName === "Flange"){
-          this.getFlangeValues() 
+     //     this.getFlangeValues() 
           this.updateFlangeValues(0)
           this.id = "flange"
         }
         if(this.filterName === "Size(idxfdxh)"){
-          this.getSizeValues()
+       //   this.getSizeValues()
           this.updateSizeValues(0)
           this.id = "size"
         }
@@ -126,15 +126,15 @@ export class CheckboxDropDownComponent {
     var tempProducts : Product[]
 console.log(this.inputProduct)
 console.log(this.selectedPriceValues)
-    for(let i = 0; i < this.priceRange.length; i++){
+    for(let i = 0; i < this.priceRangeList.length; i++){
       console.log('in for')
-      var tempcheckboxArray = this.priceRange[i].split('-')
+      var tempcheckboxArray = this.priceRangeList[i].split('-')
       var minPrice = parseInt(tempcheckboxArray[0])
       var maxPrice = parseInt(tempcheckboxArray[1]) 
 
       tempProducts = this.inputProduct.filter(product => product.price >= minPrice).filter(product => product.price <= maxPrice)
 
-      var priceRange : string = this.priceRange[i]
+      var priceRange : string = this.priceRangeList[i]
       var count : number = tempProducts.length
 
       this.checkboxArrayPrice[0][i] = priceRange + ' (' + count + ')'
@@ -151,7 +151,9 @@ console.log(this.checkboxArrayPrice[0][i])
         for(let i = 0;i<this.checkboxArrayPrice[0].length;i++)
         {
           for(let j =0; j < this.selectedPriceValues.length; j++){
-            if(this.checkboxArrayPrice[0][i] === this.selectedPriceValues[j]){
+            var checkboxValue = this.checkboxArrayPrice[0][i].substring(0,this.checkboxArrayPrice[0][i].length - 4)
+            var selectedValue = this.selectedPriceValues[j].substring(0,this.selectedPriceValues[j].length - 4)
+            if(checkboxValue === selectedValue){
               this.checkboxArrayPrice[1][i]= true
               break
             }
@@ -226,7 +228,9 @@ console.log(this.selectedFlangeValues)
       for(let i = 0;i<this.checkboxArrayFlange[0].length;i++)
       {
         for(let j =0; j < this.selectedFlangeValues.length; j++){
-          if(this.checkboxArrayFlange[0][i] === this.selectedFlangeValues[j]){
+          var checkboxValue = this.checkboxArrayFlange[0][i].substring(0,this.checkboxArrayFlange[0][i].length - 4)
+          var selectedValue = this.selectedFlangeValues[j].substring(0,this.selectedFlangeValues[j].length - 4)
+          if(checkboxValue === selectedValue){
             this.checkboxArrayFlange[1][i]= true
             break
           }
@@ -294,7 +298,7 @@ console.log(this.selectedFlangeValues)
         }
       }
     }
-
+console.log(this.sizeList)
     for (let i = 0; i < this.sizeList.length; i++){
       var size : string = this.sizeList[i]
       var count : number = this.getCount(size,"Size(idxfdxh)")

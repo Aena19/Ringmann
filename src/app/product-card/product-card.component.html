@@ -1,7 +1,6 @@
-
-    <div class="container">
+<div class="container">
         <div class="h-[350px] border border-slate-500 rounded-3xl p-2 border-opacity-30">
-            <a [routerLink]="[product.id]">
+            <div (click)="goToProductDetail()" class="hover:cursor-pointer">
                 <div>
                     <img class="w-full rounded-2xl" src="assets/images/{{product.imgsrc}}">
                 </div>
@@ -15,7 +14,7 @@
                         From ₹ {{product.price}}.00
                     </p>
                 </div>
-            </a>
+            </div>
         </div>
         <router-outlet></router-outlet>
     </div>

@@ -16,12 +16,51 @@ constructor(private route : ActivatedRoute, private http : HttpClient, private r
 url: string = 'assets/data/products.json';
 products!: Product[]
 productId : number = 0
+filter !: string 
+selectedProductIds !: string
+firstProductId : number = 0
+lastProductId : number = 0
+selectedProductsArray : string[] = []
 
 ngOnInit(){
   this.route.paramMap.subscribe((params : ParamMap)=>{
     this.productId = parseInt(params.get('id') || '')
+    console.log(this.productId)
+    this.filter = (params.get('filter') || '')
+    console.log(this.filter)
+    console.log(params)
+    this.selectedProductIds = (params.get('selectedIds') || '')
+    console.log(this.selectedProductIds)
   })
   this.getProductsData()
+  this.selectedProductsArray = this.selectedProductIds.split(',')
+  this.firstProductId = parseInt(this.selectedProductsArray[0])
+  this.lastProductId = parseInt(this.selectedProductsArray[this.selectedProductsArray.length-1])
+  
+}
+
+getPreviousId(){
+  var prevId, curId
+  for(let i = 0; i < this.selectedProductsArray.length; i++){
+    curId = parseInt(this.selectedProductsArray[i])
+    if(this.productId === curId){
+      prevId = this.selectedProductsArray[i-1]
+      break
+    }
+  }
+  return prevId
+}
+
+getNextId(){
+  var nextId, curId
+  for(let i = 0; i < this.selectedProductsArray.length; i++){
+    curId = parseInt(this.selectedProductsArray[i])
+    if(this.productId === curId){
+      nextId = this.selectedProductsArray[i+1]
+      break
+    }
+  }
+  return nextId
 }
 
 getProductsData()
@@ -33,13 +72,16 @@ getProductsData()
 }
 
 gotoPrevious(){
-  this.router.navigate([('../') + (String(this.productId - 1))],{relativeTo : this.route})
+  
+  this.router.navigate([('../../../') + (String(this.getPreviousId())) + '/' + this.filter + '/' + this.selectedProductIds],{relativeTo : this.route})
 }
 
 
 gotoNext(){
-  this.router.navigate([('../') + (String(this.productId + 1))],{relativeTo : this.route})
+  this.router.navigate([('../../../') + (String(this.getNextId())) + '/' + this.filter + '/' + this.selectedProductIds],{relativeTo : this.route})
 }
 
-
+goBackToProducts(){
+  this.router.navigate([('../../../') + (this.filter)],{relativeTo : this.route})
+}
 }
