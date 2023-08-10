@@ -26,49 +26,75 @@ export class CheckboxDropDownComponent {
   checkboxArrayPrice : [string[],boolean[]] = [[],[]]
   checkboxArrayFlange : [string[],boolean[]] = [[],[]]
   checkboxArraySize : [string[],boolean[]] = [[],[]]
-  id:string=""
-  selectedPriceValues : string[] =[]
-  selectedFlangeValues : string[] =[]
-  selectedSizeValues : string[] =[]
+  id:string = ""
+  selectedPriceValues : string[] = []
+  selectedFlangeValues : string[] = []
+  selectedSizeValues : string[] = []
   selectedPriceCount : number = 0
   selectedFlangeCount : number = 0
   selectedSizeCount : number = 0
   priceRange : string[] = ["0-50","51-100","101-150","151-200","201-250","251-300"]
+  flangeList !: string[]
+  sizeList !: string[]
   productsToBeDisplayed! : Product[]
   label : string = "label"
-  @Input() detailclickCounter : number = 100
+  @Input() detailclickCounter !: number 
 
   constructor(private http: HttpClient) {}
  
   ngOnInit(){
+
+    const details = document.querySelectorAll("details");
+
+    details.forEach(targetDetail => {
+      targetDetail.addEventListener("toggle", (event) => {
+        console.log(targetDetail)
+        
+        if (targetDetail.open) {
+          console.log('targetdetail open')
+          
+
+        } else {
+          console.log('targetdetail close')
+         this.detailclickCounter = 0
+        }
+      });
+
+    }
+
+    )
+    
+
     this.getProductsData()
   }
 
   detailClicked(){
-    // console.log(this.detailclickCounter)
-    // console.log(this.inputProduct)
-    // if(this.detailclickCounter == 0){
-    //   console.log('in detailclicked..in if')
-    //     if(this.filterName === 'Price')
-    //     {
-    //       this.selectedPriceValues = this.checkedValues
-    //       this.getPriceValues(1)
-    //     }
-    //     else 
-        // if(this.filterName === 'Flange')
-        // {
-        //   this.selectedFlangeValues = this.checkedValues
-        //   this.getFlangeValues(1)
-        // }
-    //     else if(this.filterName === 'Size(idxfdxh)')
-    //     {
-    //       this.selectedSizeValues = this.checkedValues
-    //       this.getSizeValues(1)
-    //     }
-    //   this.detailclickCounter++
-    // }
-    // else
-    //   console.log('detail clicked else block')
+    console.log('detailClicked')
+    console.log(this.checkedValues)
+    console.log(this.detailclickCounter)
+    console.log(this.inputProduct)
+    if(this.detailclickCounter == 0){
+      console.log('in detailclicked..in if')
+        if(this.filterName === 'Price')
+        {
+          this.selectedPriceValues = this.checkedValues
+          this.getPriceValues(1)
+        }
+        else 
+        if(this.filterName === 'Flange')
+        {
+          this.selectedFlangeValues = this.checkedValues
+          this.updateFlangeValues(1)
+        }
+        else if(this.filterName === 'Size(idxfdxh)')
+        {
+          this.selectedSizeValues = this.checkedValues
+          this.updateSizeValues(1)
+        }
+      this.detailclickCounter++
+    }
+    else
+      console.log('detail clicked else block')
   }
 
   getProductsData()
@@ -76,11 +102,13 @@ export class CheckboxDropDownComponent {
     return this.http.get(this.url).subscribe({
       next: (data) => {this.products = data as Product[]
         if(this.filterName === "Flange"){
-          this.getFlangeValues(0) 
+          this.getFlangeValues() 
+          this.updateFlangeValues(0)
           this.id = "flange"
         }
         if(this.filterName === "Size(idxfdxh)"){
-          this.getSizeValues(0)
+          this.getSizeValues()
+          this.updateSizeValues(0)
           this.id = "size"
         }
         if(this.filterName === "Price"){
@@ -94,8 +122,12 @@ export class CheckboxDropDownComponent {
   }
 
   getPriceValues(mode:number){
+    console.log('in getpricevalues with mode = '+mode)
     var tempProducts : Product[]
+console.log(this.inputProduct)
+console.log(this.selectedPriceValues)
     for(let i = 0; i < this.priceRange.length; i++){
+      console.log('in for')
       var tempcheckboxArray = this.priceRange[i].split('-')
       var minPrice = parseInt(tempcheckboxArray[0])
       var maxPrice = parseInt(tempcheckboxArray[1]) 
@@ -106,30 +138,38 @@ export class CheckboxDropDownComponent {
       var count : number = tempProducts.length
 
       this.checkboxArrayPrice[0][i] = priceRange + ' (' + count + ')'
-
-      if(mode ==0){
+console.log(this.checkboxArrayPrice[0][i])
+      if(mode ==0 || this.selectedPriceValues.length === 0){
         for(let i = 0;i<this.checkboxArrayPrice[0].length;i++)
         {
           this.checkboxArrayPrice[1][i]= false
         }
       }
       else{
+        console.log(this.checkboxArrayPrice[0].length)
+        console.log(this.selectedPriceValues.length)
         for(let i = 0;i<this.checkboxArrayPrice[0].length;i++)
         {
-          for(let j =0; j < this.selectedPriceValues.length; i++){
-            if(this.checkboxArrayPrice[0][i] === this.selectedPriceValues[i])
-            this.checkboxArrayPrice[1][i]= true
+          for(let j =0; j < this.selectedPriceValues.length; j++){
+            if(this.checkboxArrayPrice[0][i] === this.selectedPriceValues[j]){
+              this.checkboxArrayPrice[1][i]= true
+              break
+            }
+            else
+              this.checkboxArrayPrice[1][i]= false
           }
           
         }
       }
     }
+    console.log(this.checkboxArrayPrice)
+    this.selectedPriceCount = this.selectedPriceValues.length
   }
 
 
-  getFlangeValues(mode:number){
+  getFlangeValues(){
     this.flangeValues = []
-    console.log('in getflangevalues with mode = ' + mode)
+    console.log('in getflangevalues with mode = ')
     console.log(this.inputProduct)
     if(this.inputProduct != undefined){
       for(let i = 0; i < this.inputProduct.length; i++){
@@ -152,16 +192,31 @@ export class CheckboxDropDownComponent {
     // }
 
     this.flangeValues = this.flangeValues.sort()
-    this.checkboxArrayFlange[0] = this.flangeValues.filter(this.uniqueFilter)
+    this.flangeList = this.flangeValues.filter(this.uniqueFilter)
+  }
 
-    for (let i = 0; i < this.checkboxArrayFlange[0].length; i++){
-      var flange : string = this.checkboxArrayFlange[0][i]
+  updateFlangeValues(mode : number){
+    this.checkboxArrayFlange = [[],[]]
+    this.flangeValues = []
+
+    console.log('updateFlangeValues with mode = ' + mode)
+
+    for(let i = 0; i < this.inputProduct.length; i++){
+      if(this.inputProduct[i].flange != null){
+        for(let j = 0; j < this.inputProduct[i].flange.length; j++){
+            this.flangeValues.push(this.inputProduct[i].flange[j])
+        }
+      }
+    }
+
+    for (let i = 0; i < this.flangeList.length; i++){
+      var flange : string = this.flangeList[i]
       var count : number = this.getCount(flange,"Flange")
       this.checkboxArrayFlange[0][i] = flange + " (" + count + ")" 
 
     }
-
-    if(mode === 0){
+console.log(this.selectedFlangeValues)
+    if(mode === 0 || this.selectedFlangeValues.length === 0){
       for(let i = 0;i<this.checkboxArrayFlange[0].length;i++)
       {
         this.checkboxArrayFlange[1][i]= false
@@ -170,14 +225,18 @@ export class CheckboxDropDownComponent {
     else{
       for(let i = 0;i<this.checkboxArrayFlange[0].length;i++)
       {
-        for(let j =0; j < this.selectedFlangeValues.length; i++){
-          if(this.checkboxArrayFlange[0][i] === this.selectedFlangeValues[i])
-          this.checkboxArrayFlange[1][i]= true
+        for(let j =0; j < this.selectedFlangeValues.length; j++){
+          if(this.checkboxArrayFlange[0][i] === this.selectedFlangeValues[j]){
+            this.checkboxArrayFlange[1][i]= true
+            break
+          }
+          else
+          this.checkboxArrayFlange[1][i]= false
         }
         
       }
     }
-
+    this.selectedFlangeCount = this.selectedFlangeValues.length
     console.log(this.checkboxArrayFlange)
   }
 
@@ -190,9 +249,14 @@ export class CheckboxDropDownComponent {
       return 0
   }
 
-  getSizeValues(mode:number){
+  uniqueFilter(value : string, index : number, self : string[]) {
+    return self.indexOf(value) === index;
+  }
+
+  getSizeValues(){
     this.sizeValues = []
-    console.log('in getsizevalues with mode = ' + mode)
+    console.log('in getSizevalues with mode = ')
+    console.log(this.inputProduct)
     if(this.inputProduct != undefined){
       for(let i = 0; i < this.inputProduct.length; i++){
         if(this.inputProduct[i].size != null){
@@ -212,16 +276,33 @@ export class CheckboxDropDownComponent {
     //     }
     //   }
     // }
-    this.sizeValues = this.sizeValues.sort()
-    this.checkboxArraySize[0] = this.sizeValues.filter(this.uniqueFilter)
 
-    for (let i = 0; i < this.checkboxArraySize[0].length; i++){
-      var size : string = this.checkboxArraySize[0][i]
+    this.sizeValues = this.sizeValues.sort()
+    this.sizeList = this.sizeValues.filter(this.uniqueFilter)
+  }
+
+  updateSizeValues(mode : number){
+    this.checkboxArraySize = [[],[]]
+    this.sizeValues = []
+
+    console.log('updatesizeValues with mode = ' + mode)
+
+    for(let i = 0; i < this.inputProduct.length; i++){
+      if(this.inputProduct[i].size != null){
+        for(let j = 0; j < this.inputProduct[i].size.length; j++){
+            this.sizeValues.push(this.inputProduct[i].size[j])
+        }
+      }
+    }
+
+    for (let i = 0; i < this.sizeList.length; i++){
+      var size : string = this.sizeList[i]
       var count : number = this.getCount(size,"Size(idxfdxh)")
       this.checkboxArraySize[0][i] = size + " (" + count + ")" 
 
     }
-    if(mode === 0){
+console.log(this.selectedSizeValues.length)
+    if(mode === 0 || this.selectedSizeValues.length === 0){
       for(let i = 0;i<this.checkboxArraySize[0].length;i++)
       {
         this.checkboxArraySize[1][i]= false
@@ -230,18 +311,22 @@ export class CheckboxDropDownComponent {
     else{
       for(let i = 0;i<this.checkboxArraySize[0].length;i++)
       {
-        for(let j =0; j < this.selectedSizeValues.length; i++){
-          if(this.checkboxArraySize[0][i] === this.selectedSizeValues[i])
-          this.checkboxArraySize[1][i]= true
+        for(let j =0; j < this.selectedSizeValues.length; j++){
+          var checkboxValue = this.checkboxArraySize[0][i].substring(0,this.checkboxArraySize[0][i].length - 4)
+          var selectedValue = this.selectedSizeValues[j].substring(0,this.selectedSizeValues[j].length - 4)
+          if(checkboxValue === selectedValue)
+          {
+            this.checkboxArraySize[1][i]= true
+            break
+          }
+          else
+            this.checkboxArraySize[1][i]= false
         }
+        
       }
     }
-
-    console.log(this.checkboxArrayFlange)
-  }
-
-  uniqueFilter(value : string, index : number, self : string[]) {
-    return self.indexOf(value) === index;
+    this.selectedSizeCount = this.selectedSizeValues.length
+    console.log(this.checkboxArraySize)
   }
 
   filterValueChanged(){
@@ -411,35 +496,35 @@ export class CheckboxDropDownComponent {
 
   }
 
-  updateFlangeValues(inputProduct : Product[]){
-    var filterValue : string
-    var count : number
+  // updateFlangeValues(inputProduct : Product[]){
+  //   var filterValue : string
+  //   var count : number
 
-    for(let i = 0; i > -1; i++){
-      if(document.getElementById("flange"+i) != null){
-        filterValue = document.getElementById("labelflange"+i)!.innerHTML.substring(1,document.getElementById("labelflange"+i)!.innerHTML.length-5)
-        count = inputProduct.filter(product => product.flange).filter(product => product.flange.toString().includes(filterValue)).length
-        document.getElementById("labelflange"+i)!.innerHTML = ' ' + filterValue + " (" + count + ") "
-      }
-      else
-        break
-    }
-  }
+  //   for(let i = 0; i > -1; i++){
+  //     if(document.getElementById("flange"+i) != null){
+  //       filterValue = document.getElementById("labelflange"+i)!.innerHTML.substring(1,document.getElementById("labelflange"+i)!.innerHTML.length-5)
+  //       count = inputProduct.filter(product => product.flange).filter(product => product.flange.toString().includes(filterValue)).length
+  //       document.getElementById("labelflange"+i)!.innerHTML = ' ' + filterValue + " (" + count + ") "
+  //     }
+  //     else
+  //       break
+  //   }
+  // }
   
-  updateSizeValues(inputProduct : Product[]){
-    var filterValue : string
-    var count : number
+  // updateSizeValues(inputProduct : Product[]){
+  //   var filterValue : string
+  //   var count : number
 
-    for(let i = 0; i > -1; i++){
-      if(document.getElementById("size"+i) != null){
-        filterValue = document.getElementById("labelsize"+i)!.innerHTML.substring(1,document.getElementById("labelsize"+i)!.innerHTML.length-5)
-        count = inputProduct.filter(product => product.size).filter(product => product.size.toString().includes(filterValue)).length
-        document.getElementById("labelsize"+i)!.innerHTML = ' ' + filterValue + " (" + count + ") "
-      }
-      else
-        break
-    }
-  }
+  //   for(let i = 0; i > -1; i++){
+  //     if(document.getElementById("size"+i) != null){
+  //       filterValue = document.getElementById("labelsize"+i)!.innerHTML.substring(1,document.getElementById("labelsize"+i)!.innerHTML.length-5)
+  //       count = inputProduct.filter(product => product.size).filter(product => product.size.toString().includes(filterValue)).length
+  //       document.getElementById("labelsize"+i)!.innerHTML = ' ' + filterValue + " (" + count + ") "
+  //     }
+  //     else
+  //       break
+  //   }
+  // }
 
   getTrueCount(value : boolean){
     return value

@@ -34,13 +34,6 @@ export class ProductsListComponent {
 
   detailclickCounter : number = 0
 
-  @ViewChildren(CheckboxDropDownComponent) mycomponents !: QueryList<CheckboxDropDownComponent>;
-
-  ngAfterViewInit() {
-    console.log('ngAfterViewInit')
-    //this.mycomponents.forEach(child => {console.log(child); child.});
-  }
-
   ngOnInit() {  
     document.addEventListener('click', function(e) {
       const details = document.querySelectorAll("details");
@@ -249,5 +242,49 @@ console.log(filterValue)
       this.productsToBeDisplayed = this.productsToBeDisplayed.sort((p1,p2) => p2.price - p1.price)
     }
 
+  }
+
+  removeAllFilters(){
+    console.log('removeAllFilters')
+    this.selectedFlangeValues.length = 0
+    this.selectedPriceValues.length = 0
+    this.selectedSizeValues.length = 0
+    this.getFilterValues('load')
+  }
+
+  removeFilter(value : string, filterName : string){
+    console.log(filterName + '...' + value)
+    console.log(this.selectedSizeValues)
+    value = value.substring(0,value.length -4)
+    if(filterName === 'Price'){
+      for(let i = 0; i < this.selectedPriceValues.length; i++){
+        var price : string = this.selectedPriceValues[i].substring(0,this.selectedPriceValues[i].length - 4)
+        if(price === value){
+          this.selectedPriceValues.splice(i,1)
+        }
+        this.getFilterValues(this.selectedPriceValues.toString() + ',' + this.filterName)
+      }
+    }
+    else if(filterName === 'Flange'){
+      for(let i = 0; i < this.selectedFlangeValues.length; i++){
+        var flange : string = this.selectedFlangeValues[i].substring(0,this.selectedFlangeValues[i].length - 4)
+        if(flange === value){
+          this.selectedFlangeValues.splice(i,1)
+        }
+        this.getFilterValues(this.selectedFlangeValues.toString() + ',' + this.filterName)
+      }
+    }
+    else if(filterName === 'Size(idxfdxh)'){
+      for(let i = 0; i < this.selectedSizeValues.length; i++){
+        var size : string = this.selectedSizeValues[i].substring(0,this.selectedSizeValues[i].length - 4)
+        console.log(size)
+        console.log(value)
+        if(size === value){
+          this.selectedSizeValues.splice(i,1)
+          break
+        }
+      }
+      this.getFilterValues(this.selectedSizeValues.toString() + ',' + this.filterName)
+    }
   }
 }

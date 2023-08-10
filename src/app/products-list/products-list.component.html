@@ -12,6 +12,13 @@
             <p>{{productsToBeDisplayedCount}} products</p>
         </div>        
     </div>
+    <div *ngIf="selectedPriceValues.length != 0 || selectedFlangeValues.length != 0 || selectedSizeValues.length != 0" class="text-sm flex gap-3 px-5 items-center">
+        <div>Filters applied : </div>
+        <div class="border border-slate-500 p-2 rounded-xl hover:cursor-pointer" (click)="removeFilter(p,'Price')" *ngFor="let p of selectedPriceValues"> Price : {{p.substring(0,p.length - 4)}} &nbsp; X</div>
+        <div class="border border-slate-500 p-2 rounded-xl hover:cursor-pointer" (click)="removeFilter(f,'Flange')" *ngFor="let f of selectedFlangeValues"> Flange : {{f.substring(0,f.length - 4)}} &nbsp; X</div>
+        <div class="border border-slate-500 p-2 rounded-xl hover:cursor-pointer" (click)="removeFilter(s,'Size(idxfdxh)')" *ngFor="let s of selectedSizeValues"> Size : {{s.substring(0,s.length - 4)}} &nbsp; X</div>
+        <div class="underline hover:cursor-pointer" (click)="removeAllFilters()">Remove all</div>
+    </div>
     <div class="container mx-auto flex flex-wrap relative">
         <app-product-card class="md:w-1/2 lg:w-1/3 xl:w-1/4 p-2 flex flex-wrap" *ngFor="let p of productsToBeDisplayed" [product]="p">
         </app-product-card>
